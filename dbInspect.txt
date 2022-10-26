@@ -1,0 +1,244 @@
+[
+    {
+        "Id": "4cdc0a3e3f769f713a4f881ebba27ea675d6bfe6ff62c68ffccda95b3d20d961",
+        "Created": "2022-10-25T09:35:13.760558595Z",
+        "Path": "docker-entrypoint.sh",
+        "Args": [
+            "mysqld"
+        ],
+        "State": {
+            "Status": "restarting",
+            "Running": true,
+            "Paused": false,
+            "Restarting": true,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 0,
+            "ExitCode": 2,
+            "Error": "",
+            "StartedAt": "2022-10-25T09:42:51.266505298Z",
+            "FinishedAt": "2022-10-25T09:42:51.839395898Z"
+        },
+        "Image": "sha256:14905234a4ed471d6da5b7e09d9e9f62f4d350713e2b0e8c86652ebcbf710238",
+        "ResolvConfPath": "/var/lib/docker/containers/4cdc0a3e3f769f713a4f881ebba27ea675d6bfe6ff62c68ffccda95b3d20d961/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/4cdc0a3e3f769f713a4f881ebba27ea675d6bfe6ff62c68ffccda95b3d20d961/hostname",
+        "HostsPath": "/var/lib/docker/containers/4cdc0a3e3f769f713a4f881ebba27ea675d6bfe6ff62c68ffccda95b3d20d961/hosts",
+        "LogPath": "/var/lib/docker/containers/4cdc0a3e3f769f713a4f881ebba27ea675d6bfe6ff62c68ffccda95b3d20d961/4cdc0a3e3f769f713a4f881ebba27ea675d6bfe6ff62c68ffccda95b3d20d961-json.log",
+        "Name": "/db",
+        "RestartCount": 10,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "docker-default",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": [
+                "/home/vic/PhpstormProjects/ecmascript-tuto/docker/db:/var/lib/mysql:rw"
+            ],
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "ecmascript-tuto_default",
+            "PortBindings": {
+                "3306/tcp": [
+                    {
+                        "HostIp": "",
+                        "HostPort": "3306"
+                    }
+                ]
+            },
+            "RestartPolicy": {
+                "Name": "unless-stopped",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": [],
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "host",
+            "Dns": null,
+            "DnsOptions": null,
+            "DnsSearch": null,
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "shareable",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": null,
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": null,
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "KernelMemory": 0,
+            "KernelMemoryTCP": 0,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": false,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/asound",
+                "/proc/acpi",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/5fa8af1346242ca6aa5a0a76042d7962b7537a3c8453e8a7d8a2e62501dfea65-init/diff:/var/lib/docker/overlay2/850170c1205d0c74a29779f85ed84318c3697fbe94d5cd96dfa907c8d4f36731/diff:/var/lib/docker/overlay2/b07f7f81f37f9a077baef5c28366ddbd17dcbf420842e32622ef46a63a1e54ca/diff:/var/lib/docker/overlay2/c1b05b6aa2842adde3aa2f0dfd19b4287c3ee90e241595ca54eb6b10ea203ea7/diff:/var/lib/docker/overlay2/3e98e43f405f3405d3da9bc37f263e7e1cb9d800fa35d09ed36e0af67be268d9/diff:/var/lib/docker/overlay2/bc5ba06b91238782a6fe378d7e8293c0e39e5b0d39c1609ff8eb58b372c695d1/diff:/var/lib/docker/overlay2/87882aacca6d7b66e2bd76dfff5c7e724c1eb1dfc30d99d20980d927c598ab98/diff:/var/lib/docker/overlay2/3654f46f46326e62619a5d2c9377179e970dd4270d6b5262020cf27b38f4e774/diff:/var/lib/docker/overlay2/a8acbf44b2610eab7fe8fd7b704392bb11365a9b6ddd025a4c7872a530a3228b/diff:/var/lib/docker/overlay2/d3076e4fb6053f3539d180f3f1ea78688240947fb0c5ae55aee96d6393cbcbf8/diff:/var/lib/docker/overlay2/8beb69508a53f345974e794452f8ef7a6e8f8218bdcba392b9b646cc9a176f89/diff:/var/lib/docker/overlay2/b562854d5215fb9bff86bd7d61f234fdb28f8b539f1a25f36c728d64c10088c8/diff",
+                "MergedDir": "/var/lib/docker/overlay2/5fa8af1346242ca6aa5a0a76042d7962b7537a3c8453e8a7d8a2e62501dfea65/merged",
+                "UpperDir": "/var/lib/docker/overlay2/5fa8af1346242ca6aa5a0a76042d7962b7537a3c8453e8a7d8a2e62501dfea65/diff",
+                "WorkDir": "/var/lib/docker/overlay2/5fa8af1346242ca6aa5a0a76042d7962b7537a3c8453e8a7d8a2e62501dfea65/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [
+            {
+                "Type": "bind",
+                "Source": "/home/vic/PhpstormProjects/ecmascript-tuto/docker/db",
+                "Destination": "/var/lib/mysql",
+                "Mode": "rw",
+                "RW": true,
+                "Propagation": "rprivate"
+            }
+        ],
+        "Config": {
+            "Hostname": "4cdc0a3e3f76",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "3306/tcp": {},
+                "33060/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "MYSQL_DATABASE=symfony",
+                "MYSQL_USER=root",
+                "MYSQL_PASSWORD=root",
+                "MYSQL_ROOT_PASSWORD=root",
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "GOSU_VERSION=1.14",
+                "MYSQL_MAJOR=5.7",
+                "MYSQL_VERSION=5.7.40-1.el7",
+                "MYSQL_SHELL_VERSION=8.0.31-1.el7"
+            ],
+            "Cmd": [
+                "mysqld"
+            ],
+            "Image": "ecmascript-tuto_db",
+            "Volumes": {
+                "/var/lib/mysql": {}
+            },
+            "WorkingDir": "",
+            "Entrypoint": [
+                "docker-entrypoint.sh"
+            ],
+            "OnBuild": null,
+            "Labels": {
+                "com.docker.compose.config-hash": "6e46cfe6da987a6ceeca472be9dea8545f5280853a3fcbaf985f6c3b8ec46dc0",
+                "com.docker.compose.container-number": "1",
+                "com.docker.compose.oneoff": "False",
+                "com.docker.compose.project": "ecmascript-tuto",
+                "com.docker.compose.project.config_files": "docker-compose.yml",
+                "com.docker.compose.project.working_dir": "/home/vic/PhpstormProjects/ecmascript-tuto",
+                "com.docker.compose.service": "db",
+                "com.docker.compose.version": "1.25.0"
+            }
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "a8eda437a23c6cc6e885d70fc193f192fab3915096361f8fed8f6dceddb83d56",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {},
+            "SandboxKey": "/var/run/docker/netns/a8eda437a23c",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "",
+            "Gateway": "",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "",
+            "IPPrefixLen": 0,
+            "IPv6Gateway": "",
+            "MacAddress": "",
+            "Networks": {
+                "ecmascript-tuto_default": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": [
+                        "db",
+                        "4cdc0a3e3f76"
+                    ],
+                    "NetworkID": "f04097b44f4ebcc0473255e6e76d552e886bc165352844b88c870007cd4f6526",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "",
+                    "DriverOpts": null
+                }
+            }
+        }
+    }
+]
