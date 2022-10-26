@@ -1,12 +1,14 @@
 'use strict';
 
 (function(window, $, Routing, swal) {
-    let HelperInstances = new Map();
+
+    let HelperInstances = new WeakMap();
 
     class RepLogApp {
         constructor($wrapper) {
             this.$wrapper = $wrapper;
             this.repLogs = [];
+
             HelperInstances.set(this, new Helper(this.repLogs));
 
             this.loadRepLogs();
@@ -28,8 +30,13 @@
             );
         }
 
+        /**
+         * Call like this.selectors
+         */
         static get _selectors() {
-            return { newRepForm: '.js-new-rep-log-form' }
+            return {
+                newRepForm: '.js-new-rep-log-form'
+            }
         }
 
         loadRepLogs() {
@@ -39,13 +46,12 @@
                 for (let repLog of data.items) {
                     this._addRow(repLog);
                 }
-                console.log(this.repLogs, this.repLogs.includes(data.items[0]));
             })
         }
 
         updateTotalWeightLifted() {
             this.$wrapper.find('.js-total-weight').html(
-                HelperInstances.get(this).calculateTotalWeight()
+                HelperInstances.get(this).getTotalWeightString()
             );
         }
 
@@ -86,7 +92,9 @@
                         $row.data('key'),
                         1
                     );
+
                     $row.remove();
+
                     this.updateTotalWeightLifted();
                 });
             })
@@ -102,9 +110,10 @@
             const $form = $(e.currentTarget);
             const formData = {};
 
-            for(let fieldData of $form.serializeArray()) {
+            for (let fieldData of $form.serializeArray()) {
                 formData[fieldData.name] = fieldData.value
             }
+
             this._saveRepLog(formData)
             .then((data) => {
                 this._clearForm();
@@ -117,6 +126,7 @@
         _saveRepLog(data) {
             return new Promise((resolve, reject) => {
                 const url = Routing.generate('rep_log_new');
+
                 $.ajax({
                     url,
                     method: 'POST',
@@ -164,17 +174,19 @@
         _clearForm() {
             this._removeFormErrors();
 
-            let $form = this.$wrapper.find(RepLogApp._selectors.newRepForm);
+            const $form = this.$wrapper.find(RepLogApp._selectors.newRepForm);
             $form[0].reset();
         }
 
         _addRow(repLog) {
             this.repLogs.push(repLog);
-            //let {id, itemLabel, reps} = repLog;
-            //console.log(id, itemLabel, reps)
+            // destructuring example
+            // let {id, itemLabel, reps, totallyMadeUpKey = 'whatever!'} = repLog;
+            // console.log(id, itemLabel, reps, totallyMadeUpKey);
 
             const html = rowTemplate(repLog);
             const $row = $($.parseHTML(html));
+            // store the repLogs index
             $row.data('key', this.repLogs.length - 1);
             this.$wrapper.find('tbody').append($row);
 
@@ -191,12 +203,22 @@
         }
 
         calculateTotalWeight() {
-            return Helper._calculateWeight(
+            return Helper._calculateWeights(
                 this.repLogs
             );
         }
 
-        static _calculateWeight(repLogs) {
+        getTotalWeightString(maxWeight = 500) {
+            let weight = this.calculateTotalWeight();
+
+            if (weight > maxWeight) {
+                weight = maxWeight + '+';
+            }
+
+            return weight + ' lbs';
+        }
+
+        static _calculateWeights(repLogs) {
             let totalWeight = 0;
             for (let repLog of repLogs) {
                 totalWeight += repLog.totalWeightLifted;
@@ -207,19 +229,20 @@
     }
 
     const rowTemplate = (repLog) => `
-        <tr data-weight="${ repLog.totalWeightLifted }">
-            <td>${ repLog.itemLabel }</td>
-            <td>${ repLog.reps }</td>
-            <td>${ repLog.totalWeightLifted }</td>
-            <td>
-                <a href="#"
-                   class="js-delete-rep-log"
-                   data-url="${ repLog.links._self }"
-                >
-                    <span class="fa fa-trash"></span>
-                </a>
-            </td>
-        </tr>`;
+<tr data-weight="${repLog.totalWeightLifted}">
+    <td>${repLog.itemLabel}</td>
+    <td>${repLog.reps}</td>
+    <td>${repLog.totalWeightLifted}</td>
+    <td>
+        <a href="#"
+           class="js-delete-rep-log"
+           data-url="${repLog.links._self}"
+        >
+            <span class="fa fa-trash"></span>
+        </a>
+    </td>
+</tr>
+`;
 
     window.RepLogApp = RepLogApp;
 })(window, jQuery, Routing, swal);
