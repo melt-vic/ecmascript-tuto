@@ -5,9 +5,6 @@
         <div class="col-md-7 js-rep-log-table">
             <h2>
                 Lift History
-                <a href="#list-stuff-form" class="btn btn-md btn-success pull-right">
-                    <span class="fa fa-plus"></span> Add
-                </a>
             </h2>
 
             <table class="table table-striped">
@@ -51,20 +48,13 @@
 {% block stylesheets %}
     {{ parent() }}
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/6.1.0/sweetalert2.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/sweetalert2/6.6.0/sweetalert2.min.css" />
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
 
     <script src="https://cdn.jsdelivr.net/sweetalert2/6.1.0/sweetalert2.min.js"></script>
-    <script src="{{ asset('assets/dist/RepLogApp.js') }}"></script>
-
-    <script>
-        $(document).ready(function() {
-            var $wrapper = $('.js-rep-log-table');
-            var repLogApp = new RepLogApp($wrapper);
-        });
-    </script>
+    <script src="{{ asset('build/rep_log.js') }}"></script>
 
 {% endblock %}
