@@ -16,6 +16,8 @@
     "file-loader": "2",
     "font-awesome": "4.7",
     "jquery": "3",
+    "node-sass": "4.9",
+    "sass-loader": "^6.0",
     "style-loader": "0.18.2",
     "sweetalert2": "^6.6.6",
     "webpack": "3"

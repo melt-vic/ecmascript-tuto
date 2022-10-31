@@ -28,8 +28,16 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    'style-loader', //Se ejecuta de abajo arriba: css-loader!style-loader
+                    'style-loader', // Se ejecuta de abajo arriba: css-loader!style-loader
                     'css-loader'
+                ]
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    'style-loader',     // style-loader inyecta (vía js) en el DOM los css. Mirar los exports.push en build/layout.js
+                    'css-loader',       // Convierte el css en un objeto js.
+                    'sass-loader'       // Convierte scss en css. Debe hacerse porque los navegadores sólo interpretan css, no scss.
                 ]
             },
             {
