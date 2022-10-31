@@ -35,9 +35,10 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [
-                    'style-loader',     // style-loader inyecta (vía js) en el DOM los css. Mirar los exports.push en build/layout.js
-                    'css-loader',       // Convierte el css en un objeto js.
-                    'sass-loader'       // Convierte scss en css. Debe hacerse porque los navegadores sólo interpretan css, no scss.
+                    'style-loader',         // style-loader inyecta (vía js) en el DOM los css. Mirar los exports.push en build/layout.js
+                    'css-loader',           // Convierte el css en un objeto js.
+                    'resolve-url-loader',   // Reemplaza los paths relativos dentro de url() (por ejemplo de imágenes) por el path completo
+                    'sass-loader?sourceMap' // Convierte scss en css. Debe hacerse porque los navegadores sólo interpretan css, no scss.
                 ]
             },
             {
