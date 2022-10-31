@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-md-7 js-rep-log-table">
+        <div class="col-md-7 js-rep-log-table" data-rep-logs="{{ repLogsJson|e('html_attr') }}">
             <h2>
                 Lift History
             </h2>
@@ -34,7 +34,11 @@
         </div>
         <div class="col-md-5">
             <div class="leaderboard">
-                <h2 class="text-center">
+                <h2 class="text-center js-custom-popover"
+                    data-toggle="popover"
+                    title="About the LeaderBoard"
+                    data-content="Want to be the leader? Lift Stuff"
+                >
                     <img class="dumbbell" src="{{ asset('build/static/dumbbell.png') }}" />
                     Leaderboard
                 </h2>

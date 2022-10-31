@@ -2,6 +2,29 @@ const path = require('path');
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+const styleLoader = {
+    loader: 'style-loader',
+    options: {}
+}
+const cssLoader = {
+    loader: 'css-loader',
+    options: {
+        sourceMap: true
+    }
+}
+const sassLoader = {
+    loader: 'sass-loader',
+    options: {
+        sourceMap: true
+    }
+}
+const resolveUrlLoader = {
+    loader: 'resolve-url-loader',
+    options: {
+        sourceMap: true
+    }
+}
+
 module.exports = {
     entry: {
         rep_log: './assets/js/rep_log.js',
@@ -28,17 +51,17 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    'style-loader', // Se ejecuta de abajo arriba: css-loader!style-loader
-                    'css-loader'
+                    styleLoader, // Se ejecuta de abajo arriba: css-loader!style-loader
+                    cssLoader
                 ]
             },
             {
                 test: /\.scss$/,
                 use: [
-                    'style-loader',         // style-loader inyecta (vía js) en el DOM los css. Mirar los exports.push en build/layout.js
-                    'css-loader',           // Convierte el css en un objeto js.
-                    'resolve-url-loader',   // Reemplaza los paths relativos dentro de url() (por ejemplo de imágenes) por el path completo
-                    'sass-loader?sourceMap' // Convierte scss en css. Debe hacerse porque los navegadores sólo interpretan css, no scss.
+                    styleLoader,        // style-loader inyecta (vía js) en el DOM los css. Mirar los exports.push en build/layout.js
+                    cssLoader,          // Convierte el css en un objeto js.
+                    resolveUrlLoader,   // Reemplaza los paths relativos dentro de url() (por ejemplo de imágenes) por el path completo
+                    sassLoader          // Convierte scss en css. Debe hacerse porque los navegadores sólo interpretan css, no scss.
                 ]
             },
             {
@@ -71,8 +94,8 @@ module.exports = {
             $: 'jquery'
         }),
         new CopyWebpackPlugin([
-            { from: './assets/static', to: 'static'}    // Copia a {output}/static
+            {from: './assets/static', to: 'static'}    // Copia a {output}/static
         ])
-
-    ]
+    ],
+    devtool: 'inline-source-map'
 }
