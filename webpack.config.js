@@ -95,7 +95,17 @@ module.exports = {
         }),
         new CopyWebpackPlugin([
             {from: './assets/static', to: 'static'}    // Copia a {output}/static
-        ])
+        ]),
+        new webpack.optimize.CommonsChunkPlugin({      // Allows us to move common shared code into a separate chunk. En Webpack 4 se emplea SplitChunksPlugin. Webpack Encore supports this feature out of the box.
+            name: [
+                'layout',                              // layout is an entry file. Anything included in layout is not included in other output files
+                'manifest'                             /* Webpack gives each module a number id, and the manifest contains those ids. Sometimes, those ids change.
+                                                          Normally, we don't care! These are all internal Webpack details! But... if the module ids change... then the manifest changes... and that means that the contents of layout.js change.
+                                                         Let me say it a different way: because of the module ids in the manifest, if I make a change to, say, login.js, it may cause the built layout.js file to change. Why is that a problem? Caching.
+                                                       */
+            ],
+            minChunks: Infinity,
+        })
     ],
     devtool: 'inline-source-map'
 }
