@@ -1,9 +1,11 @@
 'use strict';
 
 const Helper = require('./RepLogAppHelper');
-const $ = require('jquery');
-const swal = require('sweetalert2');
-require('sweetalert2/dist/sweetalert2.css');
+import $  from 'jquery';
+import swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.css';
+import Routing from './Routing';
+import random from 'lodash/random';
 
 let HelperInstances = new WeakMap();
 
@@ -16,6 +18,7 @@ class RepLogApp {
         for (let repLog of initialRepLogs) {
             this._addRow(repLog);
         }
+        this._clearForm();
 
         this.$wrapper.on(
             'click',
@@ -170,6 +173,8 @@ class RepLogApp {
 
         const $form = this.$wrapper.find(RepLogApp._selectors.newRepForm);
         $form[0].reset();
+
+        $form.find('[name="reps"]').val(random(1, 10));
     }
 
     _addRow(repLog) {
@@ -204,4 +209,4 @@ const rowTemplate = (repLog) => `
 </tr>
 `;
 
-module.exports = RepLogApp; // Gracias al export la variable RepLogApp supera el scope de este módulo y se convierte en global
+export default RepLogApp; // Gracias al export la variable RepLogApp supera el scope de este módulo y se convierte en global

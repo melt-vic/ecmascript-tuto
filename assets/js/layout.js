@@ -1,11 +1,10 @@
 'use strict';
-const $ = require('jquery');
-require('bootstrap-sass');
-
-require('../css/main.scss');
+import $ from 'jquery';
+import 'bootstrap-sass';
+import '../css/main.scss';
 
 // include this on every page to make sure Promise exists
-require('babel-polyfill');
+import 'babel-polyfill';
 
 $(document).ready(function() {
     $('[data-toggle="tooltip"]').tooltip();

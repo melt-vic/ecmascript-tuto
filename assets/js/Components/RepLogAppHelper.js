@@ -33,4 +33,4 @@ class Helper {
     }
 }
 
-module.exports = Helper;
+export default Helper;  // default es para cuando del fichero solo se va a exportar una clase.
