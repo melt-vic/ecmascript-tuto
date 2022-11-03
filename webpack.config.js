@@ -2,15 +2,25 @@ const path = require('path');
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const isProduction = process.env.NODE_ENV === 'production';
+const useSourcemaps = !isProduction;
+const ManifestPlugin = require('webpack-manifest-plugin');
+
+const useDevServer = false;
+const useVersioning = true;
+const publicPath = useDevServer ? 'http://localhost:8080/build/' : '/build/';
 
 const styleLoader = {
     loader: 'style-loader',
-    options: {}
+    options: {
+        sourceMap: useSourcemaps
+    }
 }
 const cssLoader = {
     loader: 'css-loader',
     options: {
-        sourceMap: true
+        sourceMap: useSourcemaps,
+        minimize: isProduction
     }
 }
 const sassLoader = {
@@ -22,13 +32,10 @@ const sassLoader = {
 const resolveUrlLoader = {
     loader: 'resolve-url-loader',
     options: {
-        sourceMap: true
+        sourceMap: useSourcemaps
     }
 }
-
-const useDevServer = false;
-
-module.exports = {
+const webpackConfig = {
     entry: {
         rep_log: './assets/js/rep_log.js',
         login: './assets/js/login.js',
@@ -36,7 +43,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'web', 'build'),
-        filename: "[name].js",
+        filename: useVersioning ? '[name].[hash:6].js' : '[name].js',
         publicPath: "/build/"
     },
     module: {
@@ -114,10 +121,34 @@ module.exports = {
             ],
             minChunks: Infinity,
         }),
-        new ExtractTextPlugin('[name].css')
+        new ExtractTextPlugin(
+            useVersioning ? '[name].[contenthash:6].css' : '[name].css'
+        ),
+        new ManifestPlugin({
+            writeToFileEmit: true,
+            basePath: 'build/'
+        })
     ],
-    devtool: 'inline-source-map',
+    devtool: useSourcemaps ? 'inline-source-map' : false,
     devServer: {
         contentBase: './web'
     }
 }
+
+if (isProduction) {
+    webpackConfig.plugins.push(
+        new webpack.optimize.UglifyJsPlugin(),
+        // Passes these options to all loaders
+        new webpack.LoaderOptionsPlugin({
+            minimize: true,
+            debug: false
+        }),
+        new webpackConfig.plugins.push(
+            new webpack.DefinePlugin({
+                'process.env.NODE_ENV': JSON.stringify('production')
+            })
+        )
+    );
+}
+
+module.exports = webpackConfig;
