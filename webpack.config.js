@@ -5,6 +5,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const isProduction = process.env.NODE_ENV === 'production';
 const useSourcemaps = !isProduction;
 const ManifestPlugin = require('webpack-manifest-plugin');
+const WebpackChunkHash = require('webpack-chunk-hash');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const useDevServer = false;
 const useVersioning = true;
@@ -43,7 +45,7 @@ const webpackConfig = {
     },
     output: {
         path: path.resolve(__dirname, 'web', 'build'),
-        filename: useVersioning ? '[name].[hash:6].js' : '[name].js',
+        filename: useVersioning ? '[name].[chunkhash:6].js' : '[name].js',
         publicPath: "/build/"
     },
     module: {
@@ -127,7 +129,13 @@ const webpackConfig = {
         new ManifestPlugin({
             writeToFileEmit: true,
             basePath: 'build/'
-        })
+        }),
+        // allows for [chunkhash]
+        new WebpackChunkHash(),
+
+        isProduction ? new webpack.HashedModuleIdsPlugin() : new webpack.NamedModulesPlugin(),
+
+        new CleanWebpackPlugin()
     ],
     devtool: useSourcemaps ? 'inline-source-map' : false,
     devServer: {
@@ -143,11 +151,9 @@ if (isProduction) {
             minimize: true,
             debug: false
         }),
-        new webpackConfig.plugins.push(
-            new webpack.DefinePlugin({
-                'process.env.NODE_ENV': JSON.stringify('production')
-            })
-        )
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('production')
+        })
     );
 }
 
