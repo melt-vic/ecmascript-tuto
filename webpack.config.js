@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const styleLoader = {
     loader: 'style-loader',
@@ -24,6 +25,8 @@ const resolveUrlLoader = {
         sourceMap: true
     }
 }
+
+const useDevServer = false;
 
 module.exports = {
     entry: {
@@ -50,19 +53,24 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: [
-                    styleLoader, // Se ejecuta de abajo arriba: css-loader!style-loader
-                    cssLoader
-                ]
+                use: ExtractTextPlugin.extract({
+                    use: [
+                        cssLoader
+                    ],
+                    // use this if CSS isn't extracted
+                    fallback: styleLoader
+                })
             },
             {
                 test: /\.scss$/,
-                use: [
-                    styleLoader,        // style-loader inyecta (vía js) en el DOM los css. Mirar los exports.push en build/layout.js
-                    cssLoader,          // Convierte el css en un objeto js.
-                    resolveUrlLoader,   // Reemplaza los paths relativos dentro de url() (por ejemplo de imágenes) por el path completo
-                    sassLoader          // Convierte scss en css. Debe hacerse porque los navegadores sólo interpretan css, no scss.
-                ]
+                use: ExtractTextPlugin.extract({
+                    use: [
+                        cssLoader,
+                        resolveUrlLoader,
+                        sassLoader
+                    ],
+                    fallback: styleLoader
+                })
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
@@ -105,7 +113,11 @@ module.exports = {
                                                        */
             ],
             minChunks: Infinity,
-        })
+        }),
+        new ExtractTextPlugin('[name].css')
     ],
-    devtool: 'inline-source-map'
+    devtool: 'inline-source-map',
+    devServer: {
+        contentBase: './web'
+    }
 }

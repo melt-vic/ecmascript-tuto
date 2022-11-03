@@ -7,7 +7,9 @@
           content="width=device-width, initial-scale=1.0">
 
     <title>{% block title %}Find Something to Lift!{% endblock %}</title>
-
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('build/layout.css') }}">
+    {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" referrerpolicy="origin" />
 </head>
 

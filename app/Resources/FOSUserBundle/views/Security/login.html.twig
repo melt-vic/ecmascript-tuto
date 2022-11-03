@@ -2,6 +2,11 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/layout.css') }}">
+{% endblock %}
+
 {% block javascripts %}
     {{ parent() }}
 
